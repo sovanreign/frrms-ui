@@ -1,0 +1,92 @@
+[
+  {
+    "id": "C001",
+    "dateTime": "01/01/24 - 11:11:11 AM",
+    "typeOfCalamity": "Flood",
+    "severityLevel": "Severe",
+    "causeOfCalamity": "Heavy Rains",
+    "evacuationAlert": "Mandatory Evacuation",
+    "status": "On going"
+  },
+  {
+    "id": "C002",
+    "dateTime": "01/02/24 - 10:10:10 AM",
+    "typeOfCalamity": "Earthquake",
+    "severityLevel": "Moderate",
+    "causeOfCalamity": "Seismic Activity",
+    "evacuationAlert": "Voluntary Evacuation",
+    "status": "Resolved"
+  },
+  {
+    "id": "C003",
+    "dateTime": "01/03/24 - 01:00:00 PM",
+    "typeOfCalamity": "Typhoon",
+    "severityLevel": "Severe",
+    "causeOfCalamity": "Strong Winds",
+    "evacuationAlert": "Mandatory Evacuation",
+    "status": "On going"
+  },
+  {
+    "id": "C004",
+    "dateTime": "01/04/24 - 02:22:22 PM",
+    "typeOfCalamity": "Landslide",
+    "severityLevel": "High",
+    "causeOfCalamity": "Heavy Rains",
+    "evacuationAlert": "Mandatory Evacuation",
+    "status": "On going"
+  },
+  {
+    "id": "C005",
+    "dateTime": "01/05/24 - 03:33:33 PM",
+    "typeOfCalamity": "Flood",
+    "severityLevel": "Low",
+    "causeOfCalamity": "Overflowing River",
+    "evacuationAlert": "Advisory Issued",
+    "status": "Resolved"
+  },
+  {
+    "id": "C006",
+    "dateTime": "01/06/24 - 04:44:44 PM",
+    "typeOfCalamity": "Wildfire",
+    "severityLevel": "Severe",
+    "causeOfCalamity": "Dry Conditions",
+    "evacuationAlert": "Mandatory Evacuation",
+    "status": "On going"
+  },
+  {
+    "id": "C007",
+    "dateTime": "01/07/24 - 05:55:55 PM",
+    "typeOfCalamity": "Storm Surge",
+    "severityLevel": "Moderate",
+    "causeOfCalamity": "Cyclone",
+    "evacuationAlert": "Voluntary Evacuation",
+    "status": "On going"
+  },
+  {
+    "id": "C008",
+    "dateTime": "01/08/24 - 06:06:06 AM",
+    "typeOfCalamity": "Flood",
+    "severityLevel": "Severe",
+    "causeOfCalamity": "Heavy Rains",
+    "evacuationAlert": "Mandatory Evacuation",
+    "status": "On going"
+  },
+  {
+    "id": "C009",
+    "dateTime": "01/09/24 - 07:07:07 AM",
+    "typeOfCalamity": "Volcanic Eruption",
+    "severityLevel": "High",
+    "causeOfCalamity": "Lava Flow",
+    "evacuationAlert": "Mandatory Evacuation",
+    "status": "On going"
+  },
+  {
+    "id": "C010",
+    "dateTime": "01/10/24 - 08:08:08 AM",
+    "typeOfCalamity": "Flood",
+    "severityLevel": "Severe",
+    "causeOfCalamity": "Heavy Rains",
+    "evacuationAlert": "Mandatory Evacuation",
+    "status": "On going"
+  }
+]
