@@ -8,11 +8,13 @@ import {
 import { Navbar } from "../../components/ui/Navbar";
 import { Sidebar } from "../../components/ui/Sidebar";
 import { useState } from "react";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 
 export function CalamityPage() {
   const [calamities, setCalamities] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentCalamity, setCurrentCalamity] = useState(null);
 
   const {
     register,
@@ -21,41 +23,48 @@ export function CalamityPage() {
     reset,
   } = useForm();
 
+  useEffect(() => {
+    const calamitiesData = JSON.parse(localStorage.getItem("calamities")) || [];
+    setCalamities(calamitiesData);
+  }, []);
+
   const onSubmit = (data) => {
-    data.id = "COO1";
-    // Add the new calamity to the list
-    const updatedCalamities = [...calamities, data];
+    if (isEditing) {
+      // Update existing calamity
+      const updatedCalamities = calamities.map((calamity) =>
+        calamity.id === currentCalamity.id ? { ...calamity, ...data } : calamity
+      );
+      localStorage.setItem("calamities", JSON.stringify(updatedCalamities));
+      setCalamities(updatedCalamities);
+    } else {
+      // Add new calamity
+      data.id = `C${calamities.length + 1}`;
+      localStorage.setItem("calamities", JSON.stringify([...calamities, data]));
+      setCalamities([...calamities, data]);
+    }
 
-    // Update state
-    setCalamities(updatedCalamities);
-
-    // Log the updated JSON data
-    console.log(
-      "Updated JSON Data:",
-      JSON.stringify(updatedCalamities, null, 2)
-    );
-
+    // Close modal and reset form
     document.getElementById("add-calamity").close();
     reset();
+    setIsEditing(false);
+    setCurrentCalamity(null);
   };
 
-  // Fetch the JSON data from the `data` folder
-  useEffect(() => {
-    const fetchCalamities = async () => {
-      try {
-        const response = await fetch("/data/calamities.json");
-        if (!response.ok) {
-          throw new Error("Failed to fetch calamities data");
-        }
-        const data = await response.json();
-        setCalamities(data);
-      } catch (error) {
-        console.error("Error fetching calamities data:", error);
-      }
-    };
+  // Open modal for adding a new calamity
+  const openAddModal = () => {
+    setIsEditing(false);
+    setCurrentCalamity(null);
+    reset(); // Clear the form
+    document.getElementById("add-calamity").showModal();
+  };
 
-    fetchCalamities();
-  }, []);
+  // Open modal for editing a calamity
+  const openEditModal = (calamity) => {
+    setIsEditing(true);
+    setCurrentCalamity(calamity);
+    reset(calamity);
+    document.getElementById("add-calamity").showModal();
+  };
 
   return (
     <div className="">
@@ -73,62 +82,92 @@ export function CalamityPage() {
             </label>
             <button
               className="btn btn-primary text-white"
-              onClick={() =>
-                document.getElementById("add-calamity").showModal()
-              }
+              onClick={() => openAddModal()}
             >
               <MdAdd className="w-6 h-6" />
               Add Calamity
             </button>
           </div>
 
-          <div className="mt-8">
-            <div className="overflow-x-auto">
-              <table className="table table-sm bg-white">
-                {/* head */}
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Date & Time</th>
-                    <th>Type of Calamity</th>
-                    <th>Severity Level</th>
-                    <th>Cause of Calamity</th>
-                    <th>Evacuation Alert Level Issued</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* row 1 */}
-                  {calamities.map((calamity) => (
-                    <tr key={calamity.id} className="hover:bg-base-100">
-                      <th>{calamity.id}</th>
-                      <td>{calamity.dateTime}</td>
-                      <td>{calamity.typeOfCalamity}</td>
-                      <td>{calamity.severityLevel}</td>
-                      <td>{calamity.causeOfCalamity}</td>
-                      <td>{calamity.evacuationAlert}</td>
-                      <td>{calamity.status}</td>
-                      <td className="">
-                        <MdMoreHoriz className="w-6 h-6 cursor-pointer" />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          {calamities.length === 0 ? (
+            <div className="mt-8 flex flex-col items-center">
+              <img src="/no-data.svg" alt="" className="w-96 h-96" />
+              <p className="text-gray-700 font-bold">No Data Available</p>
             </div>
-            <div className="flex justify-end">
-              <div className="mt-6 flex items-center gap-3">
-                <p className="text-gray-600 font-medium">1-15 of 15</p>
-                <button className="flex items-center justify-center btn btn-sm btn-circle btn-outline ">
-                  <MdArrowBackIos className="text-center" />
-                </button>
-                <button className="flex items-center justify-center btn btn-sm btn-circle btn-outline ">
-                  <MdArrowForwardIos className="text-center" />
-                </button>
+          ) : (
+            <div className="mt-8">
+              <div className="">
+                <table className="table table-sm bg-white">
+                  {/* head */}
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Date & Time</th>
+                      <th>Type of Calamity</th>
+                      <th>Severity Level</th>
+                      <th>Cause of Calamity</th>
+                      <th>Evacuation Alert Level Issued</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* row 1 */}
+                    {calamities.map((calamity) => (
+                      <tr key={calamity.id} className="hover:bg-base-100">
+                        <th>{calamity.id}</th>
+                        <td>{calamity.dateTime}</td>
+                        <td>{calamity.typeOfCalamity}</td>
+                        <td>{calamity.severityLevel}</td>
+                        <td>{calamity.causeOfCalamity}</td>
+                        <td>{calamity.evacuationAlert}</td>
+                        <td>{calamity.status}</td>
+                        <td className="">
+                          <div className="dropdown dropdown-end">
+                            <MdMoreHoriz
+                              tabIndex={0}
+                              role="button"
+                              className="w-6 h-6 cursor-pointer"
+                            />
+
+                            <ul
+                              tabIndex={0}
+                              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                            >
+                              <li>
+                                <a
+                                  className="text-gray-600"
+                                  onClick={() => openEditModal(calamity)}
+                                >
+                                  View Information
+                                </a>
+                              </li>
+                              <li>
+                                <a className="text-gray-600">
+                                  View Information Board
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="flex justify-end">
+                <div className="mt-6 flex items-center gap-3">
+                  <p className="text-gray-600 font-medium">1-15 of 15</p>
+                  <button className="flex items-center justify-center btn btn-sm btn-circle btn-outline ">
+                    <MdArrowBackIos className="text-center" />
+                  </button>
+                  <button className="flex items-center justify-center btn btn-sm btn-circle btn-outline ">
+                    <MdArrowForwardIos className="text-center" />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </section>
       </div>
 
@@ -138,7 +177,10 @@ export function CalamityPage() {
             <button
               type="button"
               className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              onClick={() => document.getElementById("add-calamity").close()}
+              onClick={() => {
+                document.getElementById("add-calamity").close();
+                reset();
+              }}
             >
               ✕
             </button>
@@ -184,7 +226,6 @@ export function CalamityPage() {
                         Select
                       </option>
                       <option value="Flood">Flood</option>
-                      <option value="Earthquake">Earthquake</option>
                       <option value="Typhoon">Typhoon</option>
                     </select>
                     {errors.typeOfCalamity && (
@@ -208,9 +249,11 @@ export function CalamityPage() {
                       <option value="" disabled selected>
                         Select
                       </option>
-                      <option value="Low">Low</option>
+                      <option value="Low">Minor</option>
                       <option value="Moderate">Moderate</option>
+                      <option value="Major">Major</option>
                       <option value="Severe">Severe</option>
+                      <option value="Catastrophic">Catastrophic</option>
                     </select>
                     {errors.severityLevel && (
                       <span className="text-red-500 text-sm">
@@ -233,11 +276,12 @@ export function CalamityPage() {
                       <option value="" disabled selected>
                         Select
                       </option>
-                      <option value="Heavy Rains">Heavy Rains</option>
-                      <option value="Seismic Activity">Seismic Activity</option>
-                      <option value="Overflowing River">
-                        Overflowing River
+                      <option value="Heavy Rainfall">Heavy Rainfall</option>
+                      <option value="River Overflow">River Overflow</option>
+                      <option value="Urban Drainage Overflow">
+                        Urban Drainage Overflow
                       </option>
+                      <option value="Typhoon">Typhoon</option>
                     </select>
                     {errors.causeOfCalamity && (
                       <span className="text-red-500 text-sm">
@@ -262,13 +306,10 @@ export function CalamityPage() {
                       <option value="" disabled selected>
                         Select
                       </option>
+                      <option value="Pre Evacuation">Pre Evacuation</option>
                       <option value="Mandatory Evacuation">
                         Mandatory Evacuation
                       </option>
-                      <option value="Voluntary Evacuation">
-                        Voluntary Evacuation
-                      </option>
-                      <option value="Advisory Only">Advisory Only</option>
                     </select>
                     {errors.evacuationAlert && (
                       <span className="text-red-500 text-sm">
@@ -292,8 +333,9 @@ export function CalamityPage() {
                         Select
                       </option>
                       <option value="Ongoing">Ongoing</option>
+                      <option value="Under Control">Under Control</option>
                       <option value="Resolved">Resolved</option>
-                      <option value="Monitoring">Monitoring</option>
+                      <option value="Other">Other</option>
                     </select>
                     {errors.currentStatus && (
                       <span className="text-red-500 text-sm">
@@ -306,7 +348,7 @@ export function CalamityPage() {
 
               <div className="flex justify-end mt-4">
                 <button type="submit" className="btn btn-primary text-white">
-                  Save
+                  {isEditing ? "Update" : "Save"}
                 </button>
               </div>
             </div>

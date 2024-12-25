@@ -1,7 +1,7 @@
 [
   {
     "id": "C001",
-    "dateTime": "01/01/24 - 11:11:11 AM",
+    "dateTime": "01/01/24",
     "typeOfCalamity": "Flood",
     "severityLevel": "Severe",
     "causeOfCalamity": "Heavy Rains",
@@ -10,7 +10,7 @@
   },
   {
     "id": "C002",
-    "dateTime": "01/02/24 - 10:10:10 AM",
+    "dateTime": "01/02/24",
     "typeOfCalamity": "Earthquake",
     "severityLevel": "Moderate",
     "causeOfCalamity": "Seismic Activity",
@@ -19,7 +19,7 @@
   },
   {
     "id": "C003",
-    "dateTime": "01/03/24 - 01:00:00 PM",
+    "dateTime": "01/03/24",
     "typeOfCalamity": "Typhoon",
     "severityLevel": "Severe",
     "causeOfCalamity": "Strong Winds",
@@ -28,7 +28,7 @@
   },
   {
     "id": "C004",
-    "dateTime": "01/04/24 - 02:22:22 PM",
+    "dateTime": "01/04/24",
     "typeOfCalamity": "Landslide",
     "severityLevel": "High",
     "causeOfCalamity": "Heavy Rains",
@@ -37,7 +37,7 @@
   },
   {
     "id": "C005",
-    "dateTime": "01/05/24 - 03:33:33 PM",
+    "dateTime": "01/05/24",
     "typeOfCalamity": "Flood",
     "severityLevel": "Low",
     "causeOfCalamity": "Overflowing River",
@@ -46,7 +46,7 @@
   },
   {
     "id": "C006",
-    "dateTime": "01/06/24 - 04:44:44 PM",
+    "dateTime": "01/06/24",
     "typeOfCalamity": "Wildfire",
     "severityLevel": "Severe",
     "causeOfCalamity": "Dry Conditions",
@@ -55,7 +55,7 @@
   },
   {
     "id": "C007",
-    "dateTime": "01/07/24 - 05:55:55 PM",
+    "dateTime": "01/07/24",
     "typeOfCalamity": "Storm Surge",
     "severityLevel": "Moderate",
     "causeOfCalamity": "Cyclone",
@@ -64,7 +64,7 @@
   },
   {
     "id": "C008",
-    "dateTime": "01/08/24 - 06:06:06 AM",
+    "dateTime": "01/08/24",
     "typeOfCalamity": "Flood",
     "severityLevel": "Severe",
     "causeOfCalamity": "Heavy Rains",
@@ -73,7 +73,7 @@
   },
   {
     "id": "C009",
-    "dateTime": "01/09/24 - 07:07:07 AM",
+    "dateTime": "01/09/24",
     "typeOfCalamity": "Volcanic Eruption",
     "severityLevel": "High",
     "causeOfCalamity": "Lava Flow",
@@ -82,7 +82,7 @@
   },
   {
     "id": "C010",
-    "dateTime": "01/10/24 - 08:08:08 AM",
+    "dateTime": "01/10/24",
     "typeOfCalamity": "Flood",
     "severityLevel": "Severe",
     "causeOfCalamity": "Heavy Rains",
