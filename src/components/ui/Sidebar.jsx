@@ -5,6 +5,7 @@ import {
   MdOutlineWarning,
   MdPerson,
 } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const items = [
   {
@@ -25,7 +26,7 @@ const items = [
   {
     name: "Evacuation Management",
     icon: MdOutlineWarning,
-    path: "/evacuation-management",
+    path: "/calamities",
   },
   {
     name: "Risk Assessment",
@@ -35,6 +36,8 @@ const items = [
 ];
 
 export function Sidebar() {
+  const navigate = useNavigate();
+
   return (
     <aside className="fixed h-screen w-60 bg-white py-4 border-r-2 ">
       <div className="h-full flex flex-col justify-between">
@@ -43,6 +46,7 @@ export function Sidebar() {
             <li
               key={item.name}
               className="flex items-center gap-3 p-2 hover:bg-base-200 hover:cursor-pointer rounded-md"
+              onClick={() => navigate(item.path)}
             >
               <item.icon className="w-6 h-6 text-gray-600" />
               <p className="text-gray-600 text-sm">{item.name}</p>

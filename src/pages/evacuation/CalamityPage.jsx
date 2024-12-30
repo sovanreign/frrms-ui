@@ -10,11 +10,14 @@ import { Sidebar } from "../../components/ui/Sidebar";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export function CalamityPage() {
   const [calamities, setCalamities] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [currentCalamity, setCurrentCalamity] = useState(null);
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -143,7 +146,10 @@ export function CalamityPage() {
                                 </a>
                               </li>
                               <li>
-                                <a className="text-gray-600">
+                                <a
+                                  className="text-gray-600"
+                                  onClick={() => navigate("/calamities/info")}
+                                >
                                   View Information Board
                                 </a>
                               </li>
