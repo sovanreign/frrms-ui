@@ -5,7 +5,7 @@ import {
   MdOutlineWarning,
   MdPerson,
 } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const items = [
   {
@@ -37,6 +37,7 @@ const items = [
 
 export function Sidebar() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <aside className="fixed h-screen w-60 bg-white py-4 border-r-2 ">
@@ -45,11 +46,15 @@ export function Sidebar() {
           {items.map((item) => (
             <li
               key={item.name}
-              className="flex items-center gap-3 p-2 hover:bg-base-200 hover:cursor-pointer rounded-md"
+              className={`flex items-center gap-3 p-2 ${
+                location.pathname.startsWith(item.path)
+                  ? "bg-primary text-white"
+                  : "hover:bg-base-200 text-gray-600"
+              }  hover:cursor-pointer rounded-md`}
               onClick={() => navigate(item.path)}
             >
-              <item.icon className="w-6 h-6 text-gray-600" />
-              <p className="text-gray-600 text-sm">{item.name}</p>
+              <item.icon className="w-6 h-6 " />
+              <p className=" text-sm">{item.name}</p>
             </li>
           ))}
         </ul>

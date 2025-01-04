@@ -10,12 +10,15 @@ import { Sidebar } from "../../components/ui/Sidebar";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { PORT } from "../../utils/constants";
 
 export function CalamityPage() {
   const [calamities, setCalamities] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [currentCalamity, setCurrentCalamity] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,31 +29,45 @@ export function CalamityPage() {
     reset,
   } = useForm();
 
+  // Fetch calamities from the API
   useEffect(() => {
-    const calamitiesData = JSON.parse(localStorage.getItem("calamities")) || [];
-    setCalamities(calamitiesData);
+    fetchCalamities();
   }, []);
 
-  const onSubmit = (data) => {
-    if (isEditing) {
-      // Update existing calamity
-      const updatedCalamities = calamities.map((calamity) =>
-        calamity.id === currentCalamity.id ? { ...calamity, ...data } : calamity
-      );
-      localStorage.setItem("calamities", JSON.stringify(updatedCalamities));
-      setCalamities(updatedCalamities);
-    } else {
-      // Add new calamity
-      data.id = `C${calamities.length + 1}`;
-      localStorage.setItem("calamities", JSON.stringify([...calamities, data]));
-      setCalamities([...calamities, data]);
+  const fetchCalamities = async () => {
+    try {
+      const response = await axios.get(`${PORT}/calamities`, {
+        params: { q: searchQuery },
+      });
+      setCalamities(response.data);
+    } catch (error) {
+      console.error("Error fetching calamities:", error);
     }
+  };
 
-    // Close modal and reset form
-    document.getElementById("add-calamity").close();
-    reset();
-    setIsEditing(false);
-    setCurrentCalamity(null);
+  const onSubmit = async (data) => {
+    try {
+      if (isEditing) {
+        await axios.put(`${PORT}/calamities/${currentCalamity.id}`, data);
+      } else {
+        await axios.post(`${PORT}/calamities`, data);
+      }
+
+      fetchCalamities();
+
+      // Close modal and reset form
+      document.getElementById("add-calamity").close();
+      reset();
+      setIsEditing(false);
+      setCurrentCalamity(null);
+    } catch (error) {
+      console.error("Error saving calamity:", error);
+    }
+  };
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value); // Update the query
+    fetchCalamities(); // Fetch data based on the updated query
   };
 
   // Open modal for adding a new calamity
@@ -81,7 +98,13 @@ export function CalamityPage() {
           <div className="flex justify-between items-center ">
             <label className="input input-bordered rounded-full bg-white flex items-center gap-2">
               <MdOutlineSearch className="w-6 h-6 text-gray-600" />
-              <input type="text" className="grow w-" placeholder="Search" />
+              <input
+                type="text"
+                className="grow w-"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={handleSearch}
+              />
             </label>
             <button
               className="btn btn-primary text-white"
@@ -119,11 +142,11 @@ export function CalamityPage() {
                     {calamities.map((calamity) => (
                       <tr key={calamity.id} className="hover:bg-base-100">
                         <th>{calamity.id}</th>
-                        <td>{calamity.dateTime}</td>
-                        <td>{calamity.typeOfCalamity}</td>
-                        <td>{calamity.severityLevel}</td>
-                        <td>{calamity.causeOfCalamity}</td>
-                        <td>{calamity.evacuationAlert}</td>
+                        <td>{calamity.date}</td>
+                        <td>{calamity.type}</td>
+                        <td>{calamity.severity_level}</td>
+                        <td>{calamity.cause}</td>
+                        <td>{calamity.alert_level}</td>
                         <td>{calamity.status}</td>
                         <td className="">
                           <div className="dropdown dropdown-end">
@@ -204,9 +227,9 @@ export function CalamityPage() {
                       </span>
                     </label>
                     <input
-                      type="date"
+                      type="datetime-local"
                       className="input input-bordered w-full"
-                      {...register("dateTime", {
+                      {...register("date", {
                         required: "Date & Time is required",
                       })}
                     />
@@ -224,7 +247,7 @@ export function CalamityPage() {
                     </label>
                     <select
                       className="select select-bordered w-full"
-                      {...register("typeOfCalamity", {
+                      {...register("type", {
                         required: "Type of Calamity is required",
                       })}
                     >
@@ -248,7 +271,7 @@ export function CalamityPage() {
                     </label>
                     <select
                       className="select select-bordered w-full"
-                      {...register("severityLevel", {
+                      {...register("severity_level", {
                         required: "Severity Level is required",
                       })}
                     >
@@ -275,7 +298,7 @@ export function CalamityPage() {
                     </label>
                     <select
                       className="select select-bordered w-full"
-                      {...register("causeOfCalamity", {
+                      {...register("cause", {
                         required: "Cause of Calamity is required",
                       })}
                     >
@@ -305,7 +328,7 @@ export function CalamityPage() {
                     </label>
                     <select
                       className="select select-bordered w-full"
-                      {...register("evacuationAlert", {
+                      {...register("alert_level", {
                         required: "Evacuation Alert Level is required",
                       })}
                     >

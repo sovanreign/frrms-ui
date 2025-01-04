@@ -9,10 +9,13 @@ export function Home() {
       {/* Main Content */}
       <div className="ml-60">
         <Navbar />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in
-          ligula at elit hendrerit consectetur.
-        </p>
+
+        <div className="w-full flex flex-col justify-center items-center h-[80vh]">
+          <h1 className="text-4xl font-bold text-gray-600">Home Page</h1>
+          <p className="text-gray-600">
+            All pages available in Evacuation Management section
+          </p>
+        </div>
       </div>
     </div>
   );
