@@ -1,32 +1,15 @@
 import { MdAdd, MdOutlineSearch } from "react-icons/md";
 import { Navbar } from "../../components/ui/Navbar";
 import { Sidebar } from "../../components/ui/Sidebar";
+import { useState } from "react";
 
 const cards = [
-  {
-    num: "856",
-    desc: "Total Population",
-  },
-  {
-    num: "21",
-    desc: "Females",
-  },
-  {
-    num: "18",
-    desc: "Males",
-  },
-  {
-    num: "6",
-    desc: "Number of Families",
-  },
-  {
-    num: "5",
-    desc: "Seniors",
-  },
-  {
-    num: "10",
-    desc: "Undergrad",
-  },
+  { num: "856", desc: "Total Population" },
+  { num: "21", desc: "Females" },
+  { num: "18", desc: "Males" },
+  { num: "6", desc: "Number of Families" },
+  { num: "5", desc: "Seniors" },
+  { num: "10", desc: "Undergrad" },
 ];
 
 const evacuees = [
@@ -145,8 +128,76 @@ const evacuees = [
 ];
 
 export function EvacueesPage() {
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("household");
+
+  // Open/Close Modal
+  const openAddEvacueeModal = () => setIsModalOpen(true);
+  const closeAddEvacueeModal = () => setIsModalOpen(false);
+
+  // Function to render content based on active tab
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case "household":
+        return (
+          <>
+            <h1 className="text-2xl font-bold text-blue-500 ">
+              HOUSEHOLD INFORMATION
+            </h1>
+            <img src="" alt="" />
+            <div className="border border-gray-300 p-4">
+              <div className="grid grid-cols-3 gap-4 mb-4">
+                <input
+                  type="text"
+                  className="border border-gray-300 p-2 rounded"
+                  placeholder="Input 1"
+                />
+                <input
+                  type="text"
+                  className="border border-gray-300 p-2 rounded"
+                  placeholder="Input 2"
+                />
+                <input
+                  type="text"
+                  className="border border-gray-300 p-2 rounded"
+                  placeholder="Input 3"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  className="border border-gray-300 p-2 rounded"
+                  placeholder="Input 4"
+                />
+                <input
+                  type="text"
+                  className="border border-gray-300 p-2 rounded"
+                  placeholder="Input 5"
+                />
+              </div>
+              <hr className="border-gray-400 mt-4" />
+            </div>
+          </>
+        );
+      case "details":
+        return <div>House Details Content</div>;
+      case "vulnerability":
+        return (
+          <div>
+            <h3 className="font-bold">Vulnerability Index Assessment</h3>
+          </div>
+        );
+      case "assistance":
+        return <div>Family Assistance Record Content</div>;
+      default:
+        return <div>Household Information Content</div>;
+    }
+  };
+
   return (
-    <div className="">
+    <div>
       <Sidebar />
 
       {/* Main Content */}
@@ -162,7 +213,7 @@ export function EvacueesPage() {
           <div className="mt-10 grid grid-cols-6 gap-3">
             {cards.map((card) => (
               <div key={card.num} className="card bg-blue-500 p-4">
-                <div className=" ">
+                <div>
                   <p className="text-3xl font-bold text-white">{card.num}</p>
                   <p className="text-white">{card.desc}</p>
                 </div>
@@ -175,7 +226,10 @@ export function EvacueesPage() {
               <MdOutlineSearch className="w-6 h-6 text-gray-600" />
               <input type="text" className="grow" placeholder="Search" />
             </label>
-            <button className="btn btn-primary text-white">
+            <button
+              onClick={openAddEvacueeModal}
+              className="btn btn-primary text-white"
+            >
               <MdAdd className="w-6 h-6" />
               Add Evacuee
             </button>
@@ -192,7 +246,7 @@ export function EvacueesPage() {
                 <th>School Age</th>
                 <th>Teen Age</th>
                 <th>Adult</th>
-                <th>Senior Cetizens</th>
+                <th>Senior Citizens</th>
                 <th># of Persons per Family</th>
                 <th>Lactating Mothers</th>
                 <th>Pregnant</th>
@@ -229,6 +283,83 @@ export function EvacueesPage() {
           </table>
         </section>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <dialog id="addEvacuee" className="modal" open>
+          <div className="modal-box w-11/12 max-w-5xl">
+            <form method="dialog">
+              {/* Tab Navigation */}
+              <nav>
+                <ul className="flex space-x-4">
+                  <li
+                    onClick={() => setActiveTab("household")}
+                    className={`cursor-pointer ${
+                      activeTab === "household"
+                        ? "text-blue-500 border-b-4 border-blue-500"
+                        : ""
+                    }`}
+                  >
+                    Household Information
+                  </li>
+                  <li
+                    onClick={() => setActiveTab("details")}
+                    className={`cursor-pointer ${
+                      activeTab === "details"
+                        ? "text-blue-500 border-b-4 border-blue-500"
+                        : ""
+                    }`}
+                  >
+                    House Details
+                  </li>
+                  <li
+                    onClick={() => setActiveTab("vulnerability")}
+                    className={`cursor-pointer ${
+                      activeTab === "vulnerability"
+                        ? "text-blue-500 border-b-4 border-blue-500"
+                        : ""
+                    }`}
+                  >
+                    Vulnerability Index Assessment
+                  </li>
+                  <li
+                    onClick={() => setActiveTab("assistance")}
+                    className={`cursor-pointer ${
+                      activeTab === "assistance"
+                        ? "text-blue-500 border-b-4 border-blue-500"
+                        : ""
+                    }`}
+                  >
+                    Family Assistance Record
+                  </li>
+                </ul>
+              </nav>
+
+              {/* Close button */}
+              <button
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                onClick={closeAddEvacueeModal}
+              >
+                ✕
+              </button>
+
+              <hr className="my-4" />
+
+              {/* Tab Content */}
+              {renderTabContent()}
+            </form>
+
+            {/* Save button */}
+            <div className="modal-action">
+              <form method="dialog">
+                <button className="btn" onClick={closeAddEvacueeModal}>
+                  Save
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      )}
     </div>
   );
 }
