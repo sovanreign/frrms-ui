@@ -288,7 +288,7 @@ export function EvacueesPage() {
       {isModalOpen && (
         <dialog id="addEvacuee" className="modal" open>
           <div className="modal-box w-11/12 max-w-5xl">
-            <form method="dialog">
+            <form>
               {/* Tab Navigation */}
               <nav>
                 <ul className="flex space-x-4">

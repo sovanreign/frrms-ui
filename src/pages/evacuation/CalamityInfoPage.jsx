@@ -4,7 +4,9 @@ import { Sidebar } from "../../components/ui/Sidebar";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { PORT } from "../../utils/constants";
 
 const stats = [
   { label: "Infant (< 1 yrs. old)", value: 3 },
@@ -53,11 +55,12 @@ const stats = [
 // ];
 
 export function CalamityInfoPage() {
-  const [evacuation, setEvacuation] = useState([]);
+  const [evacuationCenters, setEvacuationCenters] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [currentEvacuation, setCurrentEvacuation] = useState(null);
 
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const {
     register,
@@ -66,38 +69,50 @@ export function CalamityInfoPage() {
     reset,
   } = useForm();
 
+  // Fetch evacuation centers based on calamity ID
   useEffect(() => {
-    const evacuationCenter =
-      JSON.parse(localStorage.getItem("evacuation_center")) || [];
-    setEvacuation(evacuationCenter);
-  }, []);
+    const fetchEvacuationCenters = async () => {
+      try {
+        const response = await axios.get(
+          `${PORT}/evacuation-centers/calamity/${id}`
+        );
+        setEvacuationCenters(response.data);
+      } catch (error) {
+        console.error("Error fetching evacuation centers:", error);
+      }
+    };
 
-  const onSubmit = (data) => {
-    if (isEditing) {
-      // Update existing calamity
-      const updatedEvacuation = evacuation.map((evac) =>
-        evac.id === currentEvacuation.id ? { ...evac, ...data } : evacuation
+    fetchEvacuationCenters();
+  }, [id]);
+
+  const onSubmit = async (data) => {
+    try {
+      if (isEditing) {
+        // Update existing evacuation center
+        await axios.put(
+          `${PORT}/evacuation-centers/${currentEvacuation.id}`,
+          data
+        );
+      } else {
+        // Add new evacuation center
+        data.calamity_id = id; // Set calamity ID
+        await axios.post(`${PORT}/evacuation-centers`, data);
+      }
+
+      // Refresh evacuation centers
+      const response = await axios.get(
+        `${PORT}/evacuation-centers/calamity/${id}`
       );
-      localStorage.setItem(
-        "evacuation-center",
-        JSON.stringify(updatedEvacuation)
-      );
-      setEvacuation(updatedEvacuation);
-    } else {
-      // Add new calamity
-      data.id = `C${evacuation.length + 1}`;
-      localStorage.setItem(
-        "evacuation_center",
-        JSON.stringify([...evacuation, data])
-      );
-      setEvacuation([...evacuation, data]);
+      setEvacuationCenters(response.data);
+
+      // Close modal and reset form
+      document.getElementById("add-evacuation").close();
+      reset();
+      setIsEditing(false);
+      setCurrentEvacuation(null);
+    } catch (error) {
+      console.error("Error saving evacuation center:", error);
     }
-
-    // Close modal and reset form
-    document.getElementById("add-evacuation").close();
-    reset();
-    setIsEditing(false);
-    setCurrentEvacuation(null);
   };
 
   // Open modal for adding a new evacuation
@@ -109,12 +124,12 @@ export function CalamityInfoPage() {
   };
 
   // Open modal for editing a calamity
-  const openEditModal = (evac) => {
-    setIsEditing(true);
-    setCurrentEvacuation(evac);
-    reset(evac);
-    document.getElementById("add-evacuation").showModal();
-  };
+  // const openEditModal = (evac) => {
+  //   setIsEditing(true);
+  //   setCurrentEvacuation(evac);
+  //   reset(evac);
+  //   document.getElementById("add-evacuation").showModal();
+  // };
 
   return (
     <div className="">
@@ -185,29 +200,31 @@ export function CalamityInfoPage() {
                 </button>
               </div>
 
-              {evacuation.length === 0 ? (
+              {evacuationCenters.length === 0 ? (
                 <div className="mt-8 flex flex-col items-center">
                   <img src="/no-data.svg" alt="" className="w-96 h-96" />
                   <p className="text-gray-700 font-bold">No Data Available</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-3 gap-4 justify-between mt-6">
-                  {evacuation.map((center, index) => (
+                  {evacuationCenters.map((center, index) => (
                     <div
-                      onClick={() => navigate("/calamities/info/evacuees")}
                       key={index}
                       className="border cursor-pointer border-gray-300 rounded-lg p-4 shadow-sm relative"
                     >
-                      <div className="text-lg font-semibold text-gray-800">
+                      <div
+                        onClick={() => navigate("/calamities/info/evacuees")}
+                        className="text-lg font-semibold text-gray-800"
+                      >
                         {center.name}
                       </div>
                       <div className="text-sm text-gray-500">{center.zone}</div>
-                      <div className="text-sm text-gray-500">
-                        {center.evacuationType}
-                      </div>
+                      <div className="text-sm text-gray-500">{center.type}</div>
                       <div className="text-sm text-gray-700 mt-2">
-                        {center.siteManager}
-                        {center.contact && <span> - {center.contact}</span>}
+                        {center.contact_person}
+                        {center.contact_number && (
+                          <span> - {center.contact_number}</span>
+                        )}
                       </div>
                       <div className="absolute top-2 right-2">
                         <div className="dropdown dropdown-end">
@@ -221,7 +238,11 @@ export function CalamityInfoPage() {
                             tabIndex={0}
                             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
                           >
-                            <li>
+                            <li
+                              onClick={() =>
+                                navigate("/calamities/info/evacuees")
+                              }
+                            >
                               <a className="text-gray-600">View Evacuees</a>
                             </li>
                             <li>
@@ -308,7 +329,7 @@ export function CalamityInfoPage() {
                     </label>
                     <select
                       className="select select-bordered w-full"
-                      {...register("evacuationType", {
+                      {...register("type", {
                         required: "Evacuation type is required",
                       })}
                     >
@@ -335,7 +356,7 @@ export function CalamityInfoPage() {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      {...register("siteManager", {
+                      {...register("contact_person", {
                         required: "Site Manager is required",
                       })}
                     />
@@ -356,7 +377,7 @@ export function CalamityInfoPage() {
                     <input
                       type="text"
                       className="input input-bordered w-full"
-                      {...register("contact", {
+                      {...register("contact_number", {
                         required: "Contact is required",
                       })}
                     />

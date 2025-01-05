@@ -171,7 +171,9 @@ export function CalamityPage() {
                               <li>
                                 <a
                                   className="text-gray-600"
-                                  onClick={() => navigate("/calamities/info")}
+                                  onClick={() =>
+                                    navigate(`/calamities/${calamity.id}`)
+                                  }
                                 >
                                   View Information Board
                                 </a>
