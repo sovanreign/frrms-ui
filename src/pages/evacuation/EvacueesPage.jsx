@@ -142,42 +142,242 @@ export function EvacueesPage() {
       case "household":
         return (
           <>
-            <h1 className="text-2xl font-bold text-blue-500 ">
+            <h1 className="text-2xl font-bold text-blue-500 ml-4">
               HOUSEHOLD INFORMATION
             </h1>
-            <img src="" alt="" />
-            <div className="border border-gray-300 p-4">
-              <div className="grid grid-cols-3 gap-4 mb-4">
-                <input
-                  type="text"
-                  className="border border-gray-300 p-2 rounded"
-                  placeholder="Input 1"
-                />
-                <input
-                  type="text"
-                  className="border border-gray-300 p-2 rounded"
-                  placeholder="Input 2"
-                />
-                <input
-                  type="text"
-                  className="border border-gray-300 p-2 rounded"
-                  placeholder="Input 3"
-                />
-              </div>
+            <div className="border-gray-300 border-2 rounded-lg p-1">
+              <div className="flex flex-wrap lg:flex-nowrap items-center justify-center lg:justify-start gap-6 p-6">
+                <div className="w-full lg:w-1/3 flex justify-center">
+                  <img
+                    src="https://via.placeholder.com/300"
+                    alt="Placeholder Image"
+                    className="w-60 h-60 object-cover rounded-lg shadow-lg"
+                  />
+                </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  className="border border-gray-300 p-2 rounded"
-                  placeholder="Input 4"
-                />
-                <input
-                  type="text"
-                  className="border border-gray-300 p-2 rounded"
-                  placeholder="Input 5"
-                />
+                <div className="w-full lg:w-2/3">
+                  <div className="grid grid-cols-4 gap-4">
+                    <input
+                      type="text"
+                      placeholder="Input 1"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 2"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 3"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 4"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 5"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 6"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 7"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 8"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 9"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 10"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 11"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 12"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 13"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 14"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 15"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 16"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 17"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 18"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 19"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                  </div>
+                </div>
               </div>
               <hr className="border-gray-400 mt-4" />
+              <div className="flex flex-wrap lg:flex-nowrap items-center justify-center lg:justify-start gap-6 p-6 ">
+                <div className="w-full lg:w-1/3 flex justify-center">
+                  <img
+                    src="https://via.placeholder.com/300"
+                    alt="Placeholder Image"
+                    className="w-60 h-60 object-cover rounded-lg shadow-lg"
+                  />
+                </div>
+
+                <div className="w-full lg:w-2/3">
+                  <div className="grid grid-cols-4 gap-4">
+                    <input
+                      type="text"
+                      placeholder="Input 1"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 2"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 3"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 4"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 5"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 6"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 7"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 8"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 9"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 10"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 11"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 12"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 13"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 14"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Input 15"
+                      className="input input-bordered w-full h-8 p-1 rounded shadow"
+                    />
+                  </div>
+                  <div className="flex justify-end gap-2 mt-4">
+                    <button className="btn btn-outline btn-error">
+                      Delete
+                    </button>
+                    <button className="btn btn-outline btn-info">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p>No. of Vulnerable Family Member</p>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                placeholder="0"
+                className="input-bordered p-1 rounded shadow w-14 text-center "
+              />
+              <p className="">No. of Older Persons</p>
+              <input
+                type="text"
+                placeholder="0"
+                className="input-bordered p-1 rounded shadow w-14 text-center "
+              />
+              <p className="">
+                No. of Pregnant & Lactating <br />
+                Mothers
+              </p>
+              <input
+                type="text"
+                placeholder="0"
+                className="input-bordered p-1 rounded shadow w-14 text-center "
+              />
+              <p className="">
+                No. of PWDs & with Medical <br />
+                Conditions
+              </p>
             </div>
           </>
         );
@@ -286,8 +486,11 @@ export function EvacueesPage() {
 
       {/* Modal */}
       {isModalOpen && (
-        <dialog id="addEvacuee" className="modal" open>
-          <div className="modal-box w-11/12 max-w-5xl">
+        <dialog
+          id="addEvacuee"
+          className={`modal ${isModalOpen ? "modal-open" : ""}`}
+        >
+          <div className="modal-box w-[90%] h-[90%] max-w-none fixed-size shadow-lg rounded-lg">
             <form>
               {/* Tab Navigation */}
               <nav>
@@ -352,7 +555,10 @@ export function EvacueesPage() {
             {/* Save button */}
             <div className="modal-action">
               <form method="dialog">
-                <button className="btn" onClick={closeAddEvacueeModal}>
+                <button
+                  className="btn bg-blue-500 hover:bg-blue-600 text-white"
+                  onClick={closeAddEvacueeModal}
+                >
                   Save
                 </button>
               </form>
