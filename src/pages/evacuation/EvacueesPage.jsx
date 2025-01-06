@@ -145,7 +145,7 @@ export function EvacueesPage() {
             <h1 className="text-2xl font-bold text-blue-500 ml-4">
               HOUSEHOLD INFORMATION
             </h1>
-            <div className="border-gray-300 border-2 rounded-lg p-1">
+            <div className="border-gray-300 border rounded-lg p-1 ml-4">
               <div className="flex flex-wrap lg:flex-nowrap items-center justify-center lg:justify-start gap-6 p-6">
                 <div className="w-full lg:w-1/3 flex justify-center">
                   <img
@@ -352,29 +352,31 @@ export function EvacueesPage() {
                 </div>
               </div>
             </div>
-            <p>No. of Vulnerable Family Member</p>
-            <div className="flex items-center gap-2">
+            <p className="ml-4 mt-3">No. of Vulnerable Family Member</p>
+            <div className="flex items-center gap-2 ml-4">
               <input
                 type="text"
                 placeholder="0"
-                className="input-bordered p-1 rounded shadow w-14 text-center "
+                className="input-bordered p-1 rounded shadow w-[100px] text-center "
               />
-              <p className="">No. of Older Persons</p>
+              <p className="text-sm text-gray-500 mr-5 ml-2">
+                No. of Older Persons
+              </p>
               <input
                 type="text"
                 placeholder="0"
-                className="input-bordered p-1 rounded shadow w-14 text-center "
+                className="input-bordered p-1 rounded shadow w-[100px] text-center "
               />
-              <p className="">
+              <p className="text-sm text-gray-500 mr-5 ml-2">
                 No. of Pregnant & Lactating <br />
                 Mothers
               </p>
               <input
                 type="text"
                 placeholder="0"
-                className="input-bordered p-1 rounded shadow w-14 text-center "
+                className="input-bordered p-1 rounded shadow w-[100px] text-center"
               />
-              <p className="">
+              <p className="text-sm text-gray-500 mr-5 ml-2">
                 No. of PWDs & with Medical <br />
                 Conditions
               </p>
@@ -382,12 +384,254 @@ export function EvacueesPage() {
           </>
         );
       case "details":
-        return <div>House Details Content</div>;
+        return (
+          <>
+            <h1 className="text-2xl font-bold text-blue-500 ml-4">
+              HOUSE DETAILS
+            </h1>
+            <div className="border-gray-300 border rounded-t-lg p-1 ml-4 pt-7 pb-5">
+              <p className="ml-7 font-semibold">
+                House Ownership{" "}
+                <span className="text-sm text-gray-500">
+                  <i>(Put check if applicable)</i>
+                </span>
+              </p>
+              <div className="flex flex-row gap-2 ml-7 mt-4">
+                <label className="flex items-center">
+                  <input type="checkbox" className="checkbox-lg mr-3" />
+                  <span className="text-sm text-gray-500">Owner</span>
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="checkbox-lg mr-3 ml-5" />
+                  <span className="text-sm text-gray-500">Renter</span>
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="checkbox-lg mr-3 ml-5" />
+                  <span className="text-sm text-gray-500">Shared</span>
+                </label>
+              </div>
+            </div>
+            <div className="border-gray-300 border rounded-b-lg p-1 ml-4 pt-7 pb-5">
+              <p className="ml-7 font-semibold">
+                House Ownership{" "}
+                <span className="text-sm text-gray-500">
+                  <i>(Put check if applicable)</i>
+                </span>
+              </p>
+              <div className="flex flex-row gap-2 ml-7 mt-4">
+                <label className="flex items-center">
+                  <input type="checkbox" className="checkbox-lg mr-3" />
+                  <span className="text-sm text-gray-500">
+                    Partially Damaged
+                  </span>
+                </label>
+                <label className="flex items-center">
+                  <input type="checkbox" className="checkbox-lg mr-3 ml-5" />
+                  <span className="text-sm text-gray-500">Totally Damaged</span>
+                </label>
+              </div>
+            </div>
+          </>
+        );
       case "vulnerability":
         return (
-          <div>
-            <h3 className="font-bold">Vulnerability Index Assessment</h3>
-          </div>
+          <>
+            <h1 className="text-2xl font-bold text-blue-500 ml-4">
+              VULNERABILTY ASSESSMENT
+            </h1>
+            <div className="border-gray-300 border rounded-t-lg p-1 ml-4 pt-2 pb-5 h-[600px] overflow-auto">
+              <h2 className="text-center font-semibold text-2xl">INDICATORS</h2>
+              <div className="flex justify-between items-center">
+                <p className="text-left text-gray-400 text-2xl mx-6 font-medium">
+                  A. Primary
+                </p>
+                <p className="text-right text-gray-400 text-2xl mx-6 font-medium">
+                  <span className="block text-center ">SCORE</span>
+                  <span className="block text-center ">
+                    <i>[YES-2] [NO-0]</i>
+                  </span>
+                </p>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 mt-5">
+                <p className="text-left mx-6 text-sm">
+                  Is the family displaced as a result of the disaster?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Is the Family earning an average montlhly income equal or
+                  below the regional poverty threshold?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Does the family belong to an IP group?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Does the family have more than five(5) family members?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Is the family headed by an elderly/minor/solo parent/PWD?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Has the family lost a family member as a result of the
+                  disaster?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>{" "}
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Does the family host or have under it&apos;s care orphaned
+                  children relative/s as a result of the disaster?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Is the family&apos;s shelter partially or totally destroyed as
+                  a result of the disaster?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Has the family lost livehood or soruce of income affected by
+                  the disaster?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="flex justify-between items-center mt-10 mb-5">
+                <p className="text-left text-gray-400 text-2xl mx-6 font-medium">
+                  B. Secondary
+                </p>
+                <p className="text-right mx-4 text-gray-400 text-2xl font-medium">
+                  <span className="block text-center ">SCORE</span>
+                  <span className="block text-center ">
+                    <i>[YES-1] [NO-0]</i>
+                  </span>
+                </p>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Does the family have pregnant or lactating mother/s?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Does the family have member/s under five[5] years old?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Does the family have member/s aged 60 years old and above?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Does the families have non-relative/s orphaned childreun under
+                  alternative parental care program?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Does the family have member/s with current chronic
+                  disease/illness?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 ">
+                <p className="text-left mx-6 text-sm">
+                  Does the family have member/s with physically
+                  disabillty/illness/special needs or limiting conditions?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+              <div className="border-gray-300 bg-gray-100 border mx-6 flex justify-between items-center p-2 mb-12">
+                <p className="text-left mx-6 text-sm">
+                  Does the family have member/s with mental
+                  disability/illness/special needs or limiting conditions?
+                </p>
+                <select className="select select-bordered resize h-10 w-32 text-sm">
+                  <option value="0">0 - No</option>
+                  <option value="1">1 - Yes</option>
+                </select>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 ml-4 mt-5">
+              <p className="mr-2">TOTAL</p>
+              <input
+                type="text"
+                placeholder="0"
+                className="input-bordered p-1 rounded shadow w-[100px] text-center mr-5"
+              />
+              <p className="mr-2">RANK</p>
+              <input
+                type="text"
+                placeholder="0"
+                className="input-bordered p-1 rounded shadow w-[100px] text-center "
+              />
+            </div>
+          </>
         );
       case "assistance":
         return <div>Family Assistance Record Content</div>;
@@ -490,7 +734,7 @@ export function EvacueesPage() {
           id="addEvacuee"
           className={`modal ${isModalOpen ? "modal-open" : ""}`}
         >
-          <div className="modal-box w-[90%] h-[90%] max-w-none fixed-size shadow-lg rounded-lg">
+          <div className="modal-box w-[90%] h-[90%] max-w-none fixed-size shadow-lg rounded-lg overflow-hidden">
             <form>
               {/* Tab Navigation */}
               <nav>
@@ -546,7 +790,7 @@ export function EvacueesPage() {
                 ✕
               </button>
 
-              <hr className="my-4" />
+              <hr className="border-gray-400 my-4" />
 
               {/* Tab Content */}
               {renderTabContent()}
@@ -555,10 +799,7 @@ export function EvacueesPage() {
             {/* Save button */}
             <div className="modal-action">
               <form method="dialog">
-                <button
-                  className="btn bg-blue-500 hover:bg-blue-600 text-white"
-                  onClick={closeAddEvacueeModal}
-                >
+                <button className="btn bg-blue-500 hover:bg-blue-600 text-white absolute bottom-4 right-4">
                   Save
                 </button>
               </form>
